@@ -1,42 +1,16 @@
 import {Camera} from './camera.js';
 
-function miseEnForme(donnees) {
-    let liste_article = document.getElementById('liste_article');
-    const createLink = document.createElement('a');
-    createLink.setAttribute('href', "test.html");
-    liste_article.appendChild(createLink);
-    createLink.innerHTML += donnees;
-}
-
-
-
-
-
 let test = new Camera();
-
-
-// test.findAllCamera().then(data => {
-//     console.log(data)
-//     let liste_article = document.getElementById('liste_article');
-//     for(let i in data){
-//         liste_article.innerHTML += ('<img src=' + data[i].image + '> <br>');
-//         liste_article.innerHTML += ('<p>' + data[i].prix + '</p> <br>');
-//         liste_article.innerHTML += ('<li>' + data[i].nom + '</li> <br>');
-//     }  
-// });
+const liste_article = document.getElementById('liste_article');
 
 test.findAllCamera().then(data => {
-    console.log(data)
     for(let i in data){
-        miseEnForme('<img src=' + data[i].image + '> <br> <p>' + data[i].prix + '</p> <br> <li>' + data[i].nom + '</li> <br>');
+        const sectionArticle = document.createElement('section');
+        sectionArticle.setAttribute('id', data[i].id);
+        liste_article.appendChild(sectionArticle);
+        const createLink = document.createElement('a');
+        createLink.setAttribute('href', "produit.html?id=" + data[i].id);
+        sectionArticle.appendChild(createLink);
+        createLink.innerHTML += ('<img src=' + data[i].image + '> <p>' + data[i].prix + ' EUROS</p> <li>' + data[i].nom + '</li>');
     }  
 });
-
-
-
-
-    
-
-
-
-
