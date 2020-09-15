@@ -16,11 +16,27 @@ footer {
     margin-top: 50px;
 }
 
+section {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border: solid 3px black;
+}
+
 a {
     color: black;
 }
 
 a:hover {
     text-decoration: none;
+    color: black;
+}
+
+li {
+    list-style: none;
+}
+
+img {
+    width: 200px;
+    height: 200px;
 }
 
