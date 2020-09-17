@@ -1,10 +1,16 @@
+import {Camera} from './camera.js';
 export class CameraDAO {
     
     static getAllCamera() {
         return fetch('http://localhost:3000/api/cameras').then(res => {
             if(res.ok) {
-                var donnees = res.json();
-                return donnees;
+                return res.json().then(data => {
+                    let camera = [];
+                    for(let i=0 ; i<data.length ; i++){
+                        camera[i] = new Camera (data[i]._id, data[i].name, data[i].price, data[i].description, data[i].imageUrl, data[i].lenses);
+                    }
+                    return camera;
+                });
             }else {
                 console.log('pas ok!');
             }
@@ -14,11 +20,27 @@ export class CameraDAO {
     static getCameraById(id){
         return fetch('http://localhost:3000/api/cameras/' + id).then(res => {
             if(res.ok) {
-                var donnees = res.json();
-                return donnees;
+                return res.json().then(data => {
+                    let camera = new Camera(data._id, data.name, data.price, data.description, data.imageUrl, data.lenses);
+                    return camera;
+                });
             }else {
                 console.log('pas ok!');
             }
+        });
+    }
+
+    static findOneCameraByUrlId() {
+        let url = new URL(document.location);
+        let parametre = url.searchParams;
+        let id = parametre.get('id');
+        return id;
+    }
+
+    static findOneCamera() {
+        let id = this.findOneCameraByUrlId();
+        return this.getCameraById(id).then(data => {
+            return data;
         });
     }
 }
