@@ -32,10 +32,15 @@ $(document).ready( () => {
 
     let ajouter_panier = document.getElementById('ajouter_panier');
     ajouter_panier.addEventListener('click', () => {
+        if(localStorage.getItem('camera') == null){
+            var contenu_panier = [];
+        }else{
+            contenu_panier =  JSON.parse(localStorage.getItem('camera'));
+        }
         CameraDAO.findOneCamera().then(data => {
-            localStorage.setItem('camera', JSON.stringify(data));
+            contenu_panier.push(data);
+            localStorage.setItem('camera', JSON.stringify(contenu_panier));
         });
-    })
-
+    });
     
 });
