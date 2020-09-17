@@ -1,9 +1,8 @@
-import {Camera} from './camera.js';
+import {CameraDAO} from './cameradao.js';
 
-let test = new Camera();
 const liste_article = document.getElementById('liste_article');
 
-test.findAllCamera().then(data => {
+CameraDAO.getAllCamera().then(data => {
     for(let i in data){
         const sectionArticle = document.createElement('section');
         sectionArticle.setAttribute('id', data[i].id);
@@ -14,3 +13,4 @@ test.findAllCamera().then(data => {
         createLink.innerHTML += ('<img src=' + data[i].image + '> <p>' + data[i].prix + ' EUROS</p> <li>' + data[i].nom + '</li>');
     }  
 });
+
