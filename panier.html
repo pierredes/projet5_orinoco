@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Orinoco - vente en ligne</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style.css">
+    <script src="panier.js"></script>
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <div class="col-md-12 text-center">
+                <h1> Orinoco - Mon panier</h1>
+            </div>
+        </div>
+        
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="col-md-12 text-center">
+                <h2>Caméras vintage</h2>
+            </div>
+            <div class="col-md-12 text-center" id="resume_panier">
+                <div class="row">
+                    <div class="col-md-8" id="resume_panier_nom"></div>
+                    <div class="col-md-1"></div>
+                    <div class="col-md-3" id="resume_panier_prix"></div>
+                </div>
+                <p id="prixAPayer">prix à payer : </p>
+            </div>
+            <section class="col-md-12">
+                <form action="" method="post">
+                    <div class="row form-group">
+                        <div class="col-md-5">
+                            <label for="prenom_contact">Prénom :</label>
+                            <input type="text" name="prenom_contact" id="prenom_contact" class="form-control">
+                        </div>
+                        <div class="col-md-2">
+                            
+                        </div>
+                        <div class="col-md-5">
+                            <label for="nom_contact">Nom :</label>
+                            <input type="text" name="nom_contact" id="nom_contact" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-md-12 form-group">
+                        <label for="email_contact">Adresse mail :</label>
+                        <input type="email" name="email_contact" id="email_contact" class="form-control">
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-md-5">
+                            <label for="adresse_contact">Adresse :</label>
+                            <input type="text" name="adresse_contact" id="adresse_contact" class="form-control">
+                        </div>
+                        <div class="col-md-2">
+                            
+                        </div>
+                        <div class="col-md-5">
+                            <label for="ville_contact">Ville :</label>
+                            <input type="text" name="ville_contact" id="ville_contact" class="form-control">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary" id="envoyer_commande">Commander</button>
+                </form>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 text-center">
+                    <a href="#">mentions légales</a>
+                </div>
+                <div class="col-md-4 text-center">
+                    <a href="#">Conditions générales </a>
+                </div>
+                <div class="col-md-4 text-center">
+                    <a href="#">Contact</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
