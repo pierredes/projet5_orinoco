@@ -1,37 +1,41 @@
-import {Camera} from './camera.js';
+import {CameraDAO} from './cameradao.js';
+$(document).ready( () => {
+   
 
-let test = new Camera();
 
-// let un_article = document.getElementById('un_article');
+    let article_photo = document.getElementById('article_photo');
+    let nom_camera = document.getElementById('nom_camera');
+    let description_camera = document.getElementById('description_camera');
+    let prix_camera = document.getElementById('prix_camera');
+    let option_personnalisation = document.getElementById('option_personnalisation');
 
-// test.findOneCamera().then(data => {
-//     const creerSection = document.createElement('section');
-//     un_article.appendChild(creerSection);
-//     const creerArticlePhoto = document.createElement('article');
-//     creerSection.appendChild(creerArticlePhoto);
-//     creerArticlePhoto.innerHTML = ('<img src=' + data.image + '>');
-//     const creerArticleTextuel = document.createElement('article');
-//     creerSection.appendChild(creerArticleTextuel);
-//     creerArticleTextuel.innerHTML = ('<h2>' + data.nom + '</h2> <br> <p>' + data.description + '</p> <br> <p> prix : ' + data.prix + ' EUROS</p>');
-//     const creerFormulaireListeDeroulante = document.createElement('form')
-//     creerArticleTextuel.appendChild(creerFormulaireListeDeroulante);
-//     const creerListeDeroulante = document.createElement('select');
-//     creerFormulaireListeDeroulante.appendChild(creerListeDeroulante);
-//     let tableau_personnalisation = data.personnalisation;
-//     for(let i = 0; i < tableau_personnalisation.length; i++){
-//         creerListeDeroulante.innerHTML += ('<option>' + tableau_personnalisation[i] + '</option>');
-//     } 
-// });
+    CameraDAO.findOneCamera().then(data => {
+        article_photo.innerHTML = ('<img src=' + data.image + '>');
+        nom_camera.innerHTML = data.nom;
+        description_camera.innerHTML = data.description;
+        prix_camera.innerHTML = data.prix;
+        let tableau_personnalisation = data.personnalisation;
+        for(let i = 0; i < tableau_personnalisation.length; i++){
+            option_personnalisation.innerHTML += ('<option>' + tableau_personnalisation[i] + '</option>');
+        }
+    });
 
-let article_photo = document.getElementById('article_photo');
-let article_texte = document.getElementById('article_texte');
-let option_personnalisation = document.getElementById('option_personnalisation');
+    let voir_panier = document.getElementById('voir_panier');
+    voir_panier.addEventListener('click', () => {
+        window.location = "panier.html";
+    });
 
-test.findOneCamera().then(data => {
-    article_photo.innerHTML = ('<img src=' + data.image + '>');
-    article_texte.innerHTML += ('<h2>' + data.nom + '</h2> <br> <p>' + data.description + '</p> <br> <p> prix : ' + data.prix + ' EUROS</p>');
-    let tableau_personnalisation = data.personnalisation;
-    for(let i = 0; i < tableau_personnalisation.length; i++){
-        option_personnalisation.innerHTML += ('<option>' + tableau_personnalisation[i] + '</option>');
-    }
+    let retour_accueil = document.getElementById('retour_accueil');
+    retour_accueil.addEventListener('click', () => {
+        window.location = 'index.html';
+    });
+
+    let ajouter_panier = document.getElementById('ajouter_panier');
+    ajouter_panier.addEventListener('click', () => {
+        CameraDAO.findOneCamera().then(data => {
+            localStorage.setItem('camera', JSON.stringify(data));
+        });
+    })
+
+    
 });
