@@ -3,6 +3,8 @@ import {Contact} from './contact.js';
 $(document).ready(() =>{
     
     // Création des variables et constantes
+    const panier_vide = document.getElementById('erreur_panier');
+    const resume_panier = document.getElementById('resume_panier');
     const resume_panier_nom = document.getElementById('resume_panier_nom');
     const resume_panier_prix = document.getElementById('resume_panier_prix');
     const prenom_contact = document.getElementById('prenom_contact');
@@ -16,27 +18,35 @@ $(document).ready(() =>{
     let products = [];
     let getcommande = JSON.parse(localStorage.getItem('camera')); // Récupération des données du localstorage
 
-    // affichage des données, calcul du prix total, et remplissage du tableau des ids des produits commandés
-    for(let i = 0; i<getcommande.length; i++){
-        resume_panier_nom.innerHTML += getcommande[i].nom + ('<br> <hr>');
-        resume_panier_prix.innerHTML += getcommande[i].prix + ('<br> <hr>');
-        total_prix = total_prix + getcommande[i].prix;
-        products.push(getcommande[i].id)
+    if(getcommande == null){
+        panier_vide.style.display = "block";
+        resume_panier.style.display = 'none';
     }
-    prixAPayer.innerHTML += total_prix + (' EUROS');
+    else{
+        // affichage des données, calcul du prix total, et remplissage du tableau des ids des produits commandés
+        for(let i = 0; i<getcommande.length; i++){
+            resume_panier_nom.innerHTML += getcommande[i].nom + ('<br> <hr>');
+            resume_panier_prix.innerHTML += getcommande[i].prix + ('<br> <hr>');
+            total_prix = total_prix + getcommande[i].prix;
+            products.push(getcommande[i].id)
+        }
+        prixAPayer.innerHTML += total_prix + (' EUROS');
 
-    envoyer_commande.addEventListener('click', (event) => {
-        event.preventDefault();
-        
-        // Création d'un contact avec les données du formulaire
-        let contact = new Contact(prenom_contact.value, nom_contact.value, adresse_contact.value, ville_contact.value, email_contact.value);
+        envoyer_commande.addEventListener('click', (event) => {
+            event.preventDefault();
+            
+            // Création d'un contact avec les données du formulaire
+            let contact = new Contact(prenom_contact.value, nom_contact.value, adresse_contact.value, ville_contact.value, email_contact.value);
 
-        // Stockage du numéro de commande récupéré ainsi que du prix total
-        ContactDAO.postContactAndProduct(contact, products).then(data => {
-            localStorage.setItem('numero_commande', data.orderId);
-            localStorage.setItem('prix', total_prix);
-            window.location = 'confirmation.html';
-        });
-    });  
+            // Stockage du numéro de commande récupéré ainsi que du prix total
+            ContactDAO.postContactAndProduct(contact, products).then(data => {
+                localStorage.setItem('numero_commande', data.orderId);
+                localStorage.setItem('prix', total_prix);
+                window.location = 'confirmation.html';
+            });
+        });  
+    }
+
+    
 
 })
