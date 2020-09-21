@@ -40,3 +40,8 @@ img {
     height: 200px;
 }
 
+#erreur_panier {
+    display: none;
+    color: red;
+}
+
