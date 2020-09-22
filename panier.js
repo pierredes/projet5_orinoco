@@ -32,18 +32,44 @@ $(document).ready(() =>{
         }
         prixAPayer.innerHTML += total_prix + (' EUROS');
 
+        // vérification des données nom prenom
+        let verifier_donnees_textuel = (texte) => {
+            let regex_texte = /^[A-Za-zéèàêë-]{2,50}$/;
+            if(regex_texte.test(texte) == false) {
+                alert('Veuillez rentrer un nom ou prénom contenant au moins deux lettres et juste des lettres');
+                return false;
+            }
+            else {
+                return texte;
+            }
+        }
+
+        //Vérification email
+        let verifier_donnees_email = (email) => {
+            let regex_email = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            if(regex_email.test(email) == false) {
+                alert('Veuillez rentrer un email correct (de la forme nom@nom.fr');
+                return false;
+            }
+            else {
+                return email;
+            } 
+        }
+
         envoyer_commande.addEventListener('click', (event) => {
             event.preventDefault();
-            
-            // Création d'un contact avec les données du formulaire
-            let contact = new Contact(prenom_contact.value, nom_contact.value, adresse_contact.value, ville_contact.value, email_contact.value);
+            if(verifier_donnees_email(email_contact.value) && verifier_donnees_textuel(prenom_contact.value) && verifier_donnees_textuel(nom_contact.value)) {
+                 // Création d'un contact avec les données du formulaire
+                let contact = new Contact(prenom_contact.value, nom_contact.value, adresse_contact.value, ville_contact.value, email_contact.value);
 
-            // Stockage du numéro de commande récupéré ainsi que du prix total
-            ContactDAO.postContactAndProduct(contact, products).then(data => {
-                localStorage.setItem('numero_commande', data.orderId);
-                localStorage.setItem('prix', total_prix);
-                window.location = 'confirmation.html';
-            });
+                // Stockage du numéro de commande récupéré ainsi que du prix total
+                ContactDAO.postContactAndProduct(contact, products).then(data => {
+                    localStorage.setItem('numero_commande', data.orderId);
+                    localStorage.setItem('prix', total_prix);
+                    window.location = 'confirmation.html';
+                });
+            }
+           
         });  
     }
 
