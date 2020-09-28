@@ -30,15 +30,7 @@ export class CameraDAO {
         });
     }
 
-    static findOneCameraByUrlId() {
-        let url = new URL(document.location);
-        let parametre = url.searchParams;
-        let id = parametre.get('id');
-        return id;
-    }
-
-    static findOneCamera() {
-        let id = this.findOneCameraByUrlId();
+    static findOneCamera(id) {
         return this.getCameraById(id).then(data => {
             return data;
         });
