@@ -28,14 +28,17 @@
             <div class="col-md-12 text-center">
                 <h2>Caméras vintage</h2>
             </div>
-            <div class="col-md-12 text-center" id="resume_panier">
-                <div class="row">
-                    <div class="col-md-8" id="resume_panier_nom"></div>
-                    <div class="col-md-1"></div>
-                    <div class="col-md-3" id="resume_panier_prix"></div>
-                </div>
-                <p id="prixAPayer">prix à payer : </p>
-            </div>
+            <table class="table table-bordered" id="resume_panier">
+                <thead>
+                    <tr>
+                        <th scope="col">Numéro</th>
+                        <th scope="col">Article</th>
+                        <th scope="col">Prix</th>
+                        <th scope="col">Prix total</th>
+                    </tr>
+                </thead>
+                <tbody id="resume_panier_test"></tbody>
+            </table>
             <div class="col-md-12 text-center" id="erreur_panier">
                 <p>Vous n'avez pas de commande</p>
             </div>
@@ -71,7 +74,7 @@
                             <input type="text" name="ville_contact" id="ville_contact" class="form-control">
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary" id="envoyer_commande">Commander</button>
+                    <button type="submit" class="btn btn-danger" id="envoyer_commande">Commander</button>
                 </form>
             </section>
         </div>
