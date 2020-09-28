@@ -1,28 +1,30 @@
 header {
-    background-color: red;
+    background-color: #F54949;
     padding-top: 20px;
     padding-bottom: 20px;
 }
 
+body {
+    background-color: #BFBFBF;
+}
+
 main {
-    background-color: aquamarine;
     margin-top: 50px;
 }
 
 footer {
-    background-color: #88E6F4;
+    background-color: #F54949;
     padding-top: 20px;
     padding-bottom: 20px;
-    margin-top: 50px;
-    position: fixed;
-    width: 100%;
-    bottom: 0px;
 }
 
 section {
     margin-top: 20px;
     margin-bottom: 20px;
-    border: solid 3px black;
+}
+
+hr {
+    background-color: red;
 }
 
 a {
@@ -48,3 +50,9 @@ img {
     color: red;
 }
 
+/* page produit */
+
+#description_article {
+    display: flex;
+    align-items: center;
+}
