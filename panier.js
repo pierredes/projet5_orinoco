@@ -12,11 +12,11 @@ $(document).ready(() =>{
     const adresse_contact = document.getElementById('adresse_contact');
     const ville_contact = document.getElementById('ville_contact');
     const envoyer_commande = document.getElementById('envoyer_commande');
-    const prixAPayer = document.getElementById('prixAPayer');
+    const resume_panier_test = document.getElementById('resume_panier_test');
     let total_prix = 0;
     let products = [];
     let getcommande = Commande.GetAllItemFromCommande('camera');
-    const resume_panier_test = document.getElementById('resume_panier_test');
+
     // Affiche la div panier vide et cache le resumé du panier
     if(getcommande == null){
         panier_vide.style.display = "block";
