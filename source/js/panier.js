@@ -1,7 +1,7 @@
 import {ContactDAO} from './classe/contactdao.js';
 import {Contact} from './classe/contact.js';
-import {Commande} from './classe/commande.js';
-$(document).ready(() =>{
+import {Cart} from './classe/cart.js';
+$(document).ready( () =>{
     
     // Création des variables et constantes
     const panier_vide = document.getElementById('erreur_panier');
@@ -15,8 +15,9 @@ $(document).ready(() =>{
     const resume_panier_test = document.getElementById('resume_panier_test');
     let total_prix = 0;
     let products = [];
-    let getcommande = Commande.GetAllItemFromCommande('camera');
 
+    let getcommande = Cart.listItemFromCart('camera');
+    
     // Affiche la div panier vide et cache le resumé du panier
     if(getcommande == null){
         panier_vide.style.display = "block";
@@ -26,16 +27,26 @@ $(document).ready(() =>{
         // affichage des données, calcul du prix total, et remplissage du tableau des ids des produits commandés
         for(let i = 0; i<getcommande.length; i++){
             total_prix = total_prix + getcommande[i].prix;
-            resume_panier_test.innerHTML += '<tr> <th scope = ' + i +'>' + i + '</th> <th>' + getcommande[i].nom + '</th> <th>' + getcommande[i].prix + '</th> <th>' + total_prix + '</th> </tr>' 
-           
+            resume_panier_test.innerHTML += '<tr> <th scope = ' + i +'>' + i + '</th> <th>' + getcommande[i].nom + '</th> <th>' + getcommande[i].prix + '</th> <th>' + total_prix + '</th> </tr>';
             products.push(getcommande[i].id);
         }
 
         // vérification des données nom prenom
         let verifier_donnees_textuel = (texte) => {
-            let regex_texte = /^[A-Za-zéèàêë-]{2,50}$/;
+            let regex_texte = /^[A-Za-zéèàêëç-\s]{2,50}$/;
             if(regex_texte.test(texte) == false) {
                 alert('Veuillez rentrer un nom ou prénom contenant au moins deux lettres et juste des lettres');
+                return false;
+            }
+            else {
+                return texte;
+            }
+        }
+
+        let verifier_donnees_ville_adresse = (texte) => {
+            let regex_texte = /^[A-Za-zéèêëç-0-9\s]{2,100}$/;
+            if(regex_texte.test(texte) == false) {
+                alert('Veuillez rentrer une adresse ou une ville contenant au moins deux caractères');
                 return false;
             }
             else {
@@ -58,7 +69,7 @@ $(document).ready(() =>{
         // envoie des données
         envoyer_commande.addEventListener('click', (event) => {
             event.preventDefault();
-            if(verifier_donnees_email(email_contact.value) && verifier_donnees_textuel(prenom_contact.value) && verifier_donnees_textuel(nom_contact.value)) {
+            if(verifier_donnees_email(email_contact.value) && verifier_donnees_textuel(prenom_contact.value) && verifier_donnees_textuel(nom_contact.value) && verifier_donnees_ville_adresse(adresse_contact.value) && verifier_donnees_ville_adresse(ville_contact.value)){
                  // Création d'un contact avec les données du formulaire
                 let contact = new Contact(prenom_contact.value, nom_contact.value, adresse_contact.value, ville_contact.value, email_contact.value);
 
@@ -66,10 +77,15 @@ $(document).ready(() =>{
                 ContactDAO.postContactAndProduct(contact, products).then(data => {
                     localStorage.setItem('numero_commande', data.orderId);
                     localStorage.setItem('prix', total_prix);
-                    window.location = 'confirmation.html';
+                    window.location = './confirmation.html';
                 });
             }
         });  
     }
+
+
+//    let cart = Cart.removeItemFromCart(id);
+
+
 
 })
