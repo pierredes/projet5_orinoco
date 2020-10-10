@@ -1,5 +1,6 @@
 import {CameraDAO} from './classe/cameradao.js';
-import {Commande} from './classe/commande.js';
+import {Cart} from './classe/cart.js';
+
 $(document).ready( () => {
    
     let article_photo = document.getElementById('article_photo');
@@ -12,10 +13,8 @@ $(document).ready( () => {
     let url = new URL(document.location);
     let parametre = url.searchParams;
     let id = parametre.get('id');
-    console.log(id)
 
-
-    // Affchage des données de la caméra
+    // Affichage des données de la caméra
     CameraDAO.findOneCamera(id).then(data => {
         article_photo.innerHTML = ('<img src=' + data.image + '>');
         nom_camera.innerHTML = data.nom;
@@ -25,24 +24,27 @@ $(document).ready( () => {
         for(let i = 0; i < tableau_personnalisation.length; i++){
             option_personnalisation.innerHTML += ('<option>' + tableau_personnalisation[i] + '</option>');
         }
+        sessionStorage.setItem(id, JSON.stringify(data));
     });
 
     // Redirection vers la page panier
     let voir_panier = document.getElementById('voir_panier');
     voir_panier.addEventListener('click', () => {
-        window.location = "panier.html";
+        window.location = "./panier.html";
     });
 
     // Redirection vers la page index
     let retour_accueil = document.getElementById('retour_accueil');
     retour_accueil.addEventListener('click', () => {
-        window.location = 'index.html';
+        window.location = './index.html';
     });
 
     // Ajout de la caméra dans le localstorage
     let ajouter_panier = document.getElementById('ajouter_panier');
+    
     ajouter_panier.addEventListener('click', () => {
-        Commande.addItemInCommande('camera', id);
+        let data = JSON.parse(sessionStorage.getItem(id));
+        Cart.addItemInCart(data);
     });
     
 });
