@@ -1,6 +1,7 @@
 import {ContactDAO} from './classe/contactdao.js';
 import {Contact} from './classe/contact.js';
 import {Cart} from './classe/cart.js';
+
 $(document).ready( () =>{
     
     // Création des variables et constantes
@@ -15,19 +16,19 @@ $(document).ready( () =>{
     const resume_panier_test = document.getElementById('resume_panier_test');
     let total_prix = 0;
     let products = [];
-
-    let getcommande = Cart.listItemFromCart('camera');
     
+    let getcommande = Cart.listItemFromCart();
+        
     // Affiche la div panier vide et cache le resumé du panier
-    if(getcommande == null){
+    if(getcommande.length == 0){
         panier_vide.style.display = "block";
         resume_panier.style.display = 'none';
     }
     else{
         // affichage des données, calcul du prix total, et remplissage du tableau des ids des produits commandés
         for(let i = 0; i<getcommande.length; i++){
-            total_prix = total_prix + getcommande[i].prix;
-            resume_panier_test.innerHTML += '<tr> <th scope = ' + i +'>' + i + '</th> <th>' + getcommande[i].nom + '</th> <th>' + getcommande[i].prix + '</th> <th>' + total_prix + '</th> </tr>';
+            total_prix = total_prix + getcommande[i].quantite * getcommande[i].prix;
+            resume_panier_test.innerHTML += '<tr> <th scope = ' + i +'>' + getcommande[i].quantite + '</th> <th>' + getcommande[i].nom + '</th> <th>' + getcommande[i].prix + '</th> <th>' + total_prix + '</th> <th> <button id="supprimerElement"> supprimer </button> </th> </tr>';
             products.push(getcommande[i].id);
         }
 
@@ -44,7 +45,7 @@ $(document).ready( () =>{
         }
 
         let verifier_donnees_ville_adresse = (texte) => {
-            let regex_texte = /^[A-Za-zéèêëç-0-9\s]{2,100}$/;
+            let regex_texte = /^[A-Za-z0-9éèêëç-\s]{2,100}$/;
             if(regex_texte.test(texte) == false) {
                 alert('Veuillez rentrer une adresse ou une ville contenant au moins deux caractères');
                 return false;
@@ -82,10 +83,5 @@ $(document).ready( () =>{
             }
         });  
     }
-
-
-//    let cart = Cart.removeItemFromCart(id);
-
-
 
 })
