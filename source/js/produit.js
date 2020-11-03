@@ -24,7 +24,7 @@ $(document).ready( () => {
         for(let i = 0; i < tableau_personnalisation.length; i++){
             option_personnalisation.innerHTML += ('<option>' + tableau_personnalisation[i] + '</option>');
         }
-        sessionStorage.setItem(id, JSON.stringify(data));
+        sessionStorage.setItem('camera', JSON.stringify(data));
     });
 
     // Redirection vers la page panier
@@ -43,7 +43,7 @@ $(document).ready( () => {
     let ajouter_panier = document.getElementById('ajouter_panier');
     
     ajouter_panier.addEventListener('click', () => {
-        let data = JSON.parse(sessionStorage.getItem(id));
+        let data = JSON.parse(sessionStorage.getItem('camera'));
         Cart.addItemInCart(data);
     });
     
