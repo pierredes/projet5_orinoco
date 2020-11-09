@@ -25,4 +25,10 @@ export class Cart {
         }
         return itemInCart;
     }
+
+    // Supprime un élément du panier
+    static deleteItemFromCart(id) {
+        localStorage.removeItem(id);
+        window.location = './panier.html';
+    }
 }
