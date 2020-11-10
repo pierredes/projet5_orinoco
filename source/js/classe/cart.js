@@ -16,12 +16,9 @@ export class Cart {
     // Récupère toute les caméras du localstorage
     static listItemFromCart() {
         let itemInCart = [];
-        let cleAIgnorer = 'quantite :';
         for(let i=0; i<localStorage.length; i++) {
             let key = localStorage.key(i);
-            if(key.search(cleAIgnorer) != 0) {
-                itemInCart.push(JSON.parse(localStorage.getItem(key)));
-            }
+            itemInCart.push(JSON.parse(localStorage.getItem(key)));
         }
         return itemInCart;
     }
