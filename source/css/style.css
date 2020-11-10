@@ -16,6 +16,9 @@ footer {
     background-color: #F54949;
     padding-top: 20px;
     padding-bottom: 20px;
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
 }
 
 section {
@@ -55,4 +58,8 @@ img {
 #description_article {
     display: flex;
     align-items: center;
+}
+
+#un_article {
+    margin-bottom: 200px;
 }
