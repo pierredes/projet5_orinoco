@@ -28,7 +28,7 @@ $(document).ready( () =>{
         // affichage des données, calcul du prix total, et remplissage du tableau des ids des produits commandés
         for(let i = 0; i<getcommande.length; i++){
             total_prix = total_prix + getcommande[i].quantite * getcommande[i].prix;
-            resume_panier_test.innerHTML += '<tr> <th scope = ' + i +'>' + getcommande[i].quantite + '</th> <th>' + getcommande[i].nom + '</th> <th>' + getcommande[i].prix + '</th> <th>' + total_prix + '</th> <th> <button id="supprimerElement'+i+'"> supprimer </button> </th> </tr>';
+            resume_panier_test.innerHTML += '<tr> <th scope = ' + i +'>' + getcommande[i].nom + '</th> <th>' + getcommande[i].prix + ' EUROS</th> <th>' + getcommande[i].quantite + '</th> <th>' + total_prix + ' EUROS</th> <th> <button id="supprimerElement'+i+'"> supprimer </button> </th> </tr>';
             products.push(getcommande[i].id);
         }
 
