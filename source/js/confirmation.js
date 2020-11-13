@@ -6,5 +6,6 @@ $(document).ready(() => {
     confirmation_prix.innerHTML = localStorage.getItem('prix');
     confirmation_numero.innerHTML = localStorage.getItem('numero_commande');
 
+    localStorage.clear();
 })
 
