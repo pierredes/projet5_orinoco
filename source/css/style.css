@@ -1,7 +1,8 @@
 header {
     background-color: #F54949;
     padding-top: 20px;
-    padding-bottom: 20px;
+    padding-bottom: 20px; 
+    width: 100%;
 }
 
 body {
@@ -61,5 +62,11 @@ img {
 }
 
 #un_article {
+    margin-bottom: 200px;
+}
+
+/* page panier */
+
+#formulaire_commande {
     margin-bottom: 200px;
 }
